@@ -1,0 +1,116 @@
+{% extends 'portfolio/base.html' %} {% block content %}
+<div class="min-h-screen bg-slate-950 text-slate-300 relative overflow-hidden">
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px] -z-10"
+  ></div>
+
+  <div class="pt-40 pb-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h1
+        class="text-5xl md:text-7xl font-extrabold text-white mb-8 tracking-tight text-center"
+      >
+        Our <span class="text-gradient">Services</span>
+      </h1>
+      <p class="text-xl text-slate-400 mb-20 max-w-3xl mx-auto text-center">
+        End-to-end digital solutions. We handle the complexity so you can focus
+        on your business growth.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-32">
+        {% for service in services %}
+        <div
+          class="group bg-slate-900 rounded-2xl p-8 border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
+        >
+          <div class="flex items-start gap-6">
+            <div
+              class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-cyan-400 font-bold text-xl group-hover:bg-cyan-500 group-hover:text-white transition-colors"
+            >
+              {{ forloop.counter }}
+            </div>
+            <div class="flex-1">
+              <h3
+                class="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors"
+              >
+                {{ service.title }}
+              </h3>
+              <p class="text-slate-400 mb-6 leading-relaxed">
+                {{ service.description }}
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                {% for item in service.includes %}
+                <span
+                  class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-full text-xs font-medium text-slate-400 group-hover:border-cyan-500/30 transition-colors"
+                >
+                  {{ item }}
+                </span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div
+        class="bg-slate-900/50 rounded-3xl p-12 border border-slate-800 text-center"
+      >
+        <h2 class="text-3xl font-bold text-white mb-12">How We Work</h2>
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="relative">
+            <div
+              class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-cyan-400 font-bold text-2xl mb-4 border border-slate-700"
+            >
+              1
+            </div>
+            <h3 class="text-white font-bold mb-2">Discovery</h3>
+            <p class="text-sm text-slate-400">
+              Understanding your goals and requirements.
+            </p>
+          </div>
+          <div class="relative">
+            <div
+              class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-cyan-400 font-bold text-2xl mb-4 border border-slate-700"
+            >
+              2
+            </div>
+            <h3 class="text-white font-bold mb-2">Strategy</h3>
+            <p class="text-sm text-slate-400">
+              Planning the architecture and design.
+            </p>
+          </div>
+          <div class="relative">
+            <div
+              class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-cyan-400 font-bold text-2xl mb-4 border border-slate-700"
+            >
+              3
+            </div>
+            <h3 class="text-white font-bold mb-2">Development</h3>
+            <p class="text-sm text-slate-400">
+              Building the solution with clean code.
+            </p>
+          </div>
+          <div class="relative">
+            <div
+              class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-cyan-400 font-bold text-2xl mb-4 border border-slate-700"
+            >
+              4
+            </div>
+            <h3 class="text-white font-bold mb-2">Delivery</h3>
+            <p class="text-sm text-slate-400">
+              Launching and ensuring everything runs smooth.
+            </p>
+          </div>
+        </div>
+
+        <a
+          href="{% url 'contact' %}"
+          class="inline-block mt-12 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25"
+        >
+          Start Your Project
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

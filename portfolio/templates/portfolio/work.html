@@ -1,0 +1,141 @@
+{% extends 'portfolio/base.html' %} {% block content %}
+<div class="min-h-screen bg-slate-950 relative overflow-hidden">
+  <div
+    class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -z-10"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] -z-10"
+  ></div>
+
+  <div class="pt-40 pb-16 px-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1
+        class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight"
+      >
+        Selected <span class="text-gradient">Work</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        A showcase of digital products, brand identities, and technical
+        solutions crafted for ambitious clients worldwide.
+      </p>
+    </div>
+  </div>
+
+  <div class="pb-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      {% if projects %}
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in projects %}
+        <div
+          class="group relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
+        >
+          <div class="relative h-64 overflow-hidden {{ project.color_class }}">
+            {% if project.image %}
+            <img
+              src="{{ project.image.url }}"
+              alt="{{ project.title }}"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"
+            ></div>
+            {% else %}
+            <div
+              class="absolute inset-0 opacity-30"
+              style="
+                background-image: radial-gradient(
+                  circle,
+                  #38bdf8 1px,
+                  transparent 1px
+                );
+                background-size: 20px 20px;
+              "
+            ></div>
+            <div class="flex items-center justify-center h-full">
+              <span
+                class="text-6xl font-black text-white/10 group-hover:text-white/20 transition-colors"
+              >
+                {{ forloop.counter|stringformat:"02d" }}
+              </span>
+            </div>
+            {% endif %}
+
+            <div
+              class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <div
+                class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20"
+              >
+                <i data-lucide="arrow-up-right" class="text-white w-6 h-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-4">
+              <div
+                class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-cyan-400 uppercase tracking-wider"
+              >
+                {{ project.get_category_display }}
+              </div>
+            </div>
+
+            <h3
+              class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors"
+            >
+              {{ project.title }}
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+              {{ project.description }}
+            </p>
+
+            <div
+              class="pt-6 border-t border-slate-800 flex items-center text-white text-sm font-semibold group/link"
+            >
+              <span>View Case Study</span>
+              <i
+                data-lucide="arrow-right"
+                class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform text-cyan-400"
+              ></i>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div
+        class="text-center py-20 bg-slate-900/50 rounded-2xl border border-slate-800 border-dashed"
+      >
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-slate-800 rounded-full mb-4"
+        >
+          <i data-lucide="folder-open" class="text-slate-500 w-8 h-8"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">No Projects Yet</h3>
+        <p class="text-slate-400">
+          Check back soon or add projects via the Admin Panel.
+        </p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="py-20 border-t border-slate-900 bg-slate-950">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Start Your Next Project
+      </h2>
+      <p class="text-slate-400 mb-8 text-lg">
+        Have a vision? Let's build something extraordinary together.
+      </p>
+      <a
+        href="{% url 'contact' %}"
+        class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25"
+      >
+        Get a Quote <i data-lucide="message-square" class="ml-2 w-5 h-5"></i>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

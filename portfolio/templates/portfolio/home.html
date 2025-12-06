@@ -1,0 +1,123 @@
+{% extends 'portfolio/base.html' %} {% block content %}
+<div class="relative min-h-screen bg-slate-950 overflow-hidden">
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] -z-10"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 w-[800px] h-[600px] bg-cyan-500/10 rounded-full blur-[100px] -z-10"
+  ></div>
+
+  <div class="pt-40 pb-20 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-semibold mb-8 tracking-wide uppercase"
+      >
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        Available for New Projects
+      </div>
+
+      <h1
+        class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight"
+      >
+        We Build <span class="text-gradient">Digital Future</span> <br />For
+        Modern Brands.
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+      >
+        A full-stack digital agency specializing in high-performance websites,
+        interactive 3D experiences, and scalable software solutions.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="{% url 'work' %}"
+          class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
+        >
+          View Portfolio <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a
+          href="{% url 'contact' %}"
+          class="px-8 py-4 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-semibold rounded-xl transition-all flex items-center justify-center"
+        >
+          Contact Sales
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-24 bg-slate-900/50 border-y border-slate-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white mb-4">Our Expertise</h2>
+        <p class="text-slate-400">Powered by the latest stack</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {% for skill in expertise %}
+        <div
+          class="group p-8 bg-slate-950 border border-slate-800 rounded-2xl hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+          >
+            <i data-lucide="cpu" class="w-24 h-24 text-cyan-400"></i>
+          </div>
+
+          <div
+            class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 border border-slate-800 group-hover:border-cyan-500/50 transition-colors"
+          >
+            <span class="text-cyan-400 font-bold text-lg"
+              >{{ forloop.counter }}</span
+            >
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-3">{{ skill.title }}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">{{ skill.desc }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="py-20 px-6">
+    <div
+      class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+    >
+      <div>
+        <div class="text-4xl font-bold text-white mb-2">150+</div>
+        <div
+          class="text-slate-500 text-sm font-medium uppercase tracking-wider"
+        >
+          Projects Shipped
+        </div>
+      </div>
+      <div>
+        <div class="text-4xl font-bold text-white mb-2">98%</div>
+        <div
+          class="text-slate-500 text-sm font-medium uppercase tracking-wider"
+        >
+          Client Retention
+        </div>
+      </div>
+      <div>
+        <div class="text-4xl font-bold text-white mb-2">24/7</div>
+        <div
+          class="text-slate-500 text-sm font-medium uppercase tracking-wider"
+        >
+          Support Active
+        </div>
+      </div>
+      <div>
+        <div class="text-4xl font-bold text-white mb-2">8+</div>
+        <div
+          class="text-slate-500 text-sm font-medium uppercase tracking-wider"
+        >
+          Years Experience
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
