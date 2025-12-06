@@ -1,0 +1,40 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-950 text-slate-300 pt-32 pb-20 px-6">
+    
+    <div class="max-w-7xl mx-auto">
+        <a href="{% url 'work' %}" class="inline-flex items-center text-slate-400 hover:text-cyan-400 mb-8 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Back to Portfolio
+        </a>
+
+        <div class="mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">{{ project.title }}</h1>
+            <div class="flex items-center gap-4 text-sm mb-8">
+                <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full font-bold uppercase">
+                    {{ project.get_category_display }}
+                </span>
+                <span class="text-slate-500">{{ project.created_at|date:"F Y" }}</span>
+            </div>
+            <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
+                {{ project.description }}
+            </p>
+        </div>
+
+        <div class="space-y-12">
+            {% if project.image %}
+            <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+                <img src="{{ project.image.url }}" class="w-full h-auto" alt="Main View">
+            </div>
+            {% endif %}
+
+            {% for gallery_item in project.gallery_images.all %}
+            <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+                <img src="{{ gallery_item.image.url }}" class="w-full h-auto" alt="Detail View">
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

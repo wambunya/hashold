@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.contrib import messages
 from .models import Project, BlogPost, Booking
@@ -18,14 +18,69 @@ def about(request):
     return render(request, 'portfolio/about.html', {'page': 'about'})
 
 def work(request):
-    # Fetch projects from Database
+    # Fetch all projects ordered by newest first
     projects = Project.objects.all().order_by('-created_at')
     return render(request, 'portfolio/work.html', {'page': 'work', 'projects': projects})
 
+def project_detail(request, pk):
+    # This is the new view for the Gallery Page
+    project = get_object_or_404(Project, pk=pk)
+    
+    # If it's a web project, redirect to the live link as a fail-safe
+    if project.project_type == 'WEB' and project.live_link:
+        return redirect(project.live_link)
+        
+    return render(request, 'portfolio/project_detail.html', {'project': project})
+
+def services(request):
+    services_list = [
+        {
+            'title': 'BRAND IDENTITY',
+            'description': 'Complete brand development from concept to execution, including logo design, color palettes, typography systems, and brand guidelines.',
+            'includes': ['Logo Design', 'Brand Strategy', 'Style Guides', 'Brand Collateral']
+        },
+        {
+            'title': 'GRAPHIC DESIGN',
+            'description': 'Creative visual solutions for all your marketing and communication needs, crafted to engage and inspire your audience.',
+            'includes': ['Marketing Materials', 'Social Media Graphics', 'Infographics', 'Presentation Design']
+        },
+        {
+            'title': 'ILLUSTRATION',
+            'description': 'Custom illustrations that bring personality and uniqueness to your brand, from character design to editorial illustrations.',
+            'includes': ['Digital Illustration', 'Character Design', 'Icon Sets', 'Editorial Art']
+        },
+        {
+            'title': 'WEB DESIGN',
+            'description': 'User-centered web design that combines aesthetics with functionality, creating seamless digital experiences.',
+            'includes': ['Website Design', 'Landing Pages', 'UI/UX Design', 'Responsive Design']
+        },
+        {
+            'title': 'PRINT SERVICES',
+            'description': 'Professional print design for all formats, ensuring your materials look stunning in physical form.',
+            'includes': ['Business Cards', 'Brochures', 'Flyers', 'Posters', 'Magazines']
+        },
+        {
+            'title': 'EVENT MATERIALS',
+            'description': 'Large-format designs that transform spaces and create memorable event experiences.',
+            'includes': ['Roll-up Banners', 'Event Backdrops', 'T-shirt Design', 'Signage', 'Stage Graphics']
+        }
+    ]
+    return render(request, 'portfolio/services.html', {'page': 'services', 'services': services_list})
+
 def blog(request):
-    # Fetch blog posts from Database
     posts = BlogPost.objects.all().order_by('-date_published')
     return render(request, 'portfolio/blog.html', {'page': 'blog', 'posts': posts})
+
+def resources(request):
+    resources_list = [
+         {'title': 'The Ultimate Branding Checklist', 'type': 'DOWNLOAD', 'desc': 'Essential steps to build a memorable brand identity'},
+         {'title': 'Color Psychology in Design', 'type': 'ARTICLE', 'desc': 'Understanding how colors influence emotions and decisions'},
+         {'title': 'Typography Best Practices', 'type': 'GUIDE', 'desc': 'Master the art of selecting and pairing fonts effectively'},
+         {'title': 'Free Design Templates', 'type': 'DOWNLOAD', 'desc': 'Customizable templates for social media and print'},
+         {'title': 'Print Design Specifications', 'type': 'GUIDE', 'desc': 'Technical requirements for flawless print production'},
+         {'title': 'Logo Design Process Revealed', 'type': 'ARTICLE', 'desc': 'Behind-the-scenes look at creating iconic logos'}
+    ]
+    return render(request, 'portfolio/resources.html', {'page': 'resources', 'resources': resources_list})
 
 def contact(request):
     if request.method == 'POST':
@@ -48,16 +103,11 @@ def contact(request):
             send_mail(
                 subject,
                 message,
-                'system@creativehub.com', # From
-                ['your-email@gmail.com'], # To (Replace with your email)
+                'system@wambunya.com', 
+                ['wambunyahashold@gmail.com'], 
                 fail_silently=False,
             )
             messages.success(request, 'Message sent successfully! We will contact you shortly.')
-            
-            # WhatsApp Note: 
-            # To send WhatsApp, you would typically use an API like Twilio here.
-            # Example pseudocode: 
-            # client.messages.create(body=message, from_='whatsapp:+14155238886', to='whatsapp:+254700000000')
 
         except Exception as e:
             messages.error(request, 'Error sending message. Please try again.')
@@ -65,14 +115,3 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'portfolio/contact.html', {'page': 'contact'})
-
-# ... (Add services and resources views as defined previously)
-def services(request):
-     # You can also make Services a model if you want them editable
-    services_list = [
-        {'title': 'BRAND IDENTITY', 'description': '...', 'includes': ['Logo', 'Strategy']},
-    ]
-    return render(request, 'portfolio/services.html', {'page': 'services', 'services': services_list})
-
-def resources(request):
-    return render(request, 'portfolio/resources.html', {'page': 'resources'})
