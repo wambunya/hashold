@@ -83,16 +83,19 @@
                 {{ post.excerpt }}
               </p>
 
-              <div class="flex items-center text-white font-medium group/link">
+              <a
+                href="{% url 'blog_detail' post.pk %}"
+                class="inline-flex items-center text-white font-medium group/link hover:text-cyan-400 transition-colors"
+              >
                 <span
-                  class="group-hover:underline decoration-cyan-500 underline-offset-4"
+                  class="group-hover/link:underline decoration-cyan-500 underline-offset-4"
                   >Read Article</span
                 >
                 <i
                   data-lucide="arrow-right"
-                  class="w-4 h-4 ml-2 text-cyan-400 group-hover/link:translate-x-1 transition-transform"
+                  class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"
                 ></i>
-              </div>
+              </a>
             </div>
           </div>
         </div>

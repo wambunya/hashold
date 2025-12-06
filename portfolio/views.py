@@ -23,7 +23,7 @@ def work(request):
     return render(request, 'portfolio/work.html', {'page': 'work', 'projects': projects})
 
 def project_detail(request, pk):
-    # This is the new view for the Gallery Page
+    # This is the view for the Design Gallery Page
     project = get_object_or_404(Project, pk=pk)
     
     # If it's a web project, redirect to the live link as a fail-safe
@@ -68,8 +68,14 @@ def services(request):
     return render(request, 'portfolio/services.html', {'page': 'services', 'services': services_list})
 
 def blog(request):
+    # Fetch all blog posts ordered by newest first
     posts = BlogPost.objects.all().order_by('-date_published')
     return render(request, 'portfolio/blog.html', {'page': 'blog', 'posts': posts})
+
+def blog_detail(request, pk):
+    # This is the NEW view for the single Blog Post Page
+    post = get_object_or_404(BlogPost, pk=pk)
+    return render(request, 'portfolio/blog_detail.html', {'post': post})
 
 def resources(request):
     resources_list = [
@@ -110,6 +116,8 @@ def contact(request):
             messages.success(request, 'Message sent successfully! We will contact you shortly.')
 
         except Exception as e:
+            # For development, it's useful to print the error to console
+            print(e)
             messages.error(request, 'Error sending message. Please try again.')
 
         return redirect('contact')
