@@ -11,4 +11,9 @@ urlpatterns = [
     path('blog/<int:pk>/', views.blog_detail, name='blog_detail'), # Detail page for Blog Posts
     path('resources/', views.resources, name='resources'),
     path('contact/', views.contact, name='contact'),
+    path('solutions/', views.solutions, name='solutions'),
+    path('integration/', views.integration, name='integration'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='terms'),
+
 ]

@@ -123,3 +123,15 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'portfolio/contact.html', {'page': 'contact'})
+
+def solutions(request):
+    return render(request, 'portfolio/solutions.html')
+
+def integration(request):
+    return render(request, 'portfolio/integration.html')
+
+def privacy(request):
+    return render(request, 'portfolio/privacy.html')
+
+def terms(request):
+    return render(request, 'portfolio/terms.html')
