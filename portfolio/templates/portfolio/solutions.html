@@ -1,24 +1,60 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<div class="min-h-screen bg-slate-950 text-slate-300 pt-32 pb-20 px-6">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8">Our <span class="text-gradient">Solutions</span></h1>
-        
-        <div class="space-y-12">
-            <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800">
-                <h2 class="text-2xl font-bold text-white mb-4">Enterprise Web Development</h2>
-                <p class="text-slate-400">Scalable, high-performance web applications tailored for large organizations. We use Django and React to build secure and robust systems.</p>
+<div class="min-h-screen bg-slate-950 text-slate-300 relative overflow-hidden">
+    
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] -z-10"></div>
+
+    <div class="pt-40 pb-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+                    Tailored <span class="text-gradient">Solutions</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                    We don't just write code; we build engines for business growth. Choose the path that fits your vision.
+                </p>
             </div>
             
-            <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800">
-                <h2 class="text-2xl font-bold text-white mb-4">E-Commerce Platforms</h2>
-                <p class="text-slate-400">Custom shopping experiences with secure payment gateways, inventory management, and intuitive user dashboards.</p>
-            </div>
-            
-            <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800">
-                <h2 class="text-2xl font-bold text-white mb-4">Brand Digitalization</h2>
-                <p class="text-slate-400">Transforming traditional businesses into digital powerhouses with comprehensive branding and digital strategy.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="globe" class="w-7 h-7"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Enterprise Web Apps</h2>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Scalable, secure, and high-performance web applications tailored for large organizations. We use Django and React to build robust systems that handle complexity with ease.
+                    </p>
+                    <a href="{% url 'contact' %}" class="flex items-center text-cyan-400 font-bold group/link">
+                        Start Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <div class="group bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-cyan-900/30 rounded-xl flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shopping-bag" class="w-7 h-7"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-4">E-Commerce Platforms</h2>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Custom shopping experiences designed to convert. Features include secure payment gateways (M-Pesa, Stripe), inventory management, and intuitive user dashboards.
+                    </p>
+                    <a href="{% url 'contact' %}" class="flex items-center text-cyan-400 font-bold group/link">
+                        Build Store <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <div class="group bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="palette" class="w-7 h-7"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Brand Digitalization</h2>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Transforming traditional businesses into digital powerhouses. We provide comprehensive branding, logo design, and digital strategy to ensure you stand out.
+                    </p>
+                    <a href="{% url 'contact' %}" class="flex items-center text-cyan-400 font-bold group/link">
+                        Transform Brand <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

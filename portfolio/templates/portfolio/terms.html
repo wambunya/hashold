@@ -1,22 +1,107 @@
-{% extends 'portfolio/base.html' %}
+{% extends 'portfolio/base.html' %} {% block content %}
+<div class="min-h-screen bg-slate-950 text-slate-300 relative">
+  <div
+    class="absolute top-0 w-full h-80 bg-gradient-to-b from-slate-900 to-slate-950 -z-10"
+  ></div>
 
-{% block content %}
-<div class="min-h-screen bg-slate-950 text-slate-300 pt-32 pb-20 px-6">
-    <div class="max-w-3xl mx-auto prose prose-invert prose-slate">
-        <h1 class="text-4xl font-extrabold text-white mb-8">Terms of Service</h1>
-        <p class="text-slate-500 mb-8">Last Updated: December 2025</p>
+  <div class="pt-40 pb-20 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          Terms of Service
+        </h1>
+        <div class="flex items-center gap-3">
+          <span
+            class="px-3 py-1 bg-cyan-900/30 text-cyan-400 text-xs font-bold uppercase rounded-full border border-cyan-900"
+            >Legal</span
+          >
+          <span class="text-slate-500 text-sm"
+            >Last Updated: December 2025</span
+          >
+        </div>
+      </div>
 
-        <h3>1. Acceptance of Terms</h3>
-        <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+      <div
+        class="bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-800 shadow-2xl"
+      >
+        <div
+          class="prose prose-lg prose-invert prose-headings:text-white prose-headings:font-bold prose-p:text-slate-400 prose-li:text-slate-400 max-w-none"
+        >
+          <h3>1. Acceptance of Terms</h3>
+          <p>
+            By accessing and using this website, you accept and agree to be
+            bound by the terms and provision of this agreement.
+          </p>
 
-        <h3>2. Intellectual Property</h3>
-        <p>This site and its original content, features, and functionality are owned by Wambunya and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+          <div class="my-8 h-px bg-slate-800"></div>
 
-        <h3>3. Project Deliverables</h3>
-        <p>All project deliverables will be outlined in a specific contract or agreement signed by both parties before work commences.</p>
+          <div
+            class="not-prose bg-blue-900/10 border-l-4 border-blue-500 p-6 rounded-r-xl my-8"
+          >
+            <h3 class="text-xl font-bold text-white mb-4">
+              2. Payment Structure
+            </h3>
+            <p class="text-slate-300 mb-4">
+              To ensure commitment and resource allocation, the following
+              payment schedule applies to all services:
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-3">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0"
+                ></i>
+                <span
+                  ><strong>Upfront Deposit:</strong> A non-refundable deposit of
+                  <span class="text-white bg-blue-600 px-2 rounded">60%</span>
+                  of the total service fee is required to commence work.</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0"
+                ></i>
+                <span
+                  ><strong>Final Balance:</strong> The remaining balance is due
+                  immediately upon project completion and before the final
+                  delivery.</span
+                >
+              </li>
+            </ul>
+          </div>
 
-        <h3>4. Limitation of Liability</h3>
-        <p>In no event shall Wambunya, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages.</p>
+          <div class="my-8 h-px bg-slate-800"></div>
+
+          <h3>3. Intellectual Property</h3>
+          <p>
+            This site and its original content, features, and functionality are
+            owned by Wambunya and are protected by international copyright,
+            trademark, patent, trade secret, and other intellectual property or
+            proprietary rights laws.
+          </p>
+
+          <div class="my-8 h-px bg-slate-800"></div>
+
+          <h3>4. Project Deliverables</h3>
+          <p>
+            All project deliverables will be outlined in a specific contract or
+            agreement signed by both parties before work commences. Ownership of
+            the final work is transferred to the client only after full payment
+            has been settled.
+          </p>
+
+          <div class="my-8 h-px bg-slate-800"></div>
+
+          <h3>5. Limitation of Liability</h3>
+          <p>
+            In no event shall Wambunya, nor its directors, employees, partners,
+            agents, suppliers, or affiliates, be liable for any indirect,
+            incidental, special, consequential or punitive damages.
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
