@@ -186,11 +186,49 @@
       </div>
     </footer>
 
+    <div
+      id="cookie-banner"
+      class="fixed bottom-0 w-full z-[60] bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 p-6 hidden transition-all duration-500 transform translate-y-full"
+    >
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="text-slate-300 text-sm">
+          <span class="text-white font-bold block mb-1 text-lg"
+            >We value your privacy</span
+          >
+          <p class="max-w-2xl">
+            We use cookies to enhance your browsing experience and analyze our
+            traffic. By clicking "Accept", you consent to our use of cookies.
+            <a
+              href="{% url 'privacy' %}"
+              class="text-cyan-400 hover:underline font-semibold ml-1"
+              >Read Policy</a
+            >.
+          </p>
+        </div>
+        <div class="flex gap-4 shrink-0">
+          <button
+            onclick="declineCookies()"
+            class="px-6 py-3 rounded-xl border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all text-sm font-bold"
+          >
+            Decline
+          </button>
+          <button
+            onclick="acceptCookies()"
+            class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 transition-all text-sm"
+          >
+            Accept Cookies
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
-      // Initialize Icons
+      // 1. Initialize Icons
       lucide.createIcons();
 
-      // Navbar Scroll Effect
+      // 2. Navbar Scroll Effect
       window.addEventListener("scroll", () => {
         const nav = document.getElementById("navbar");
         if (window.scrollY > 50) {
@@ -199,6 +237,38 @@
           nav.classList.remove("shadow-lg");
         }
       });
+
+      // 3. Cookie Consent Logic
+      document.addEventListener("DOMContentLoaded", () => {
+        const banner = document.getElementById("cookie-banner");
+
+        // Check if user has already made a choice
+        if (!localStorage.getItem("cookieConsent")) {
+          // Show banner with a slight delay for smooth animation
+          banner.classList.remove("hidden");
+          setTimeout(() => {
+            banner.classList.remove("translate-y-full");
+          }, 100);
+        }
+      });
+
+      function acceptCookies() {
+        localStorage.setItem("cookieConsent", "accepted");
+        hideBanner();
+      }
+
+      function declineCookies() {
+        localStorage.setItem("cookieConsent", "declined");
+        hideBanner();
+      }
+
+      function hideBanner() {
+        const banner = document.getElementById("cookie-banner");
+        banner.classList.add("translate-y-full");
+        setTimeout(() => {
+          banner.classList.add("hidden");
+        }, 500);
+      }
     </script>
   </body>
 </html>
