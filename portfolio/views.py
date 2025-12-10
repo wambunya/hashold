@@ -18,8 +18,18 @@ def about(request):
     return render(request, 'portfolio/about.html', {'page': 'about'})
 
 def work(request):
-    # Fetch all projects ordered by newest first
+    # Get the 'type' parameter from the URL (e.g. ?type=web)
+    filter_type = request.GET.get('type')
+    
+    # Start with all projects ordered by newest first
     projects = Project.objects.all().order_by('-created_at')
+    
+    # Apply filter if it exists
+    if filter_type == 'web':
+        projects = projects.filter(project_type='WEB')
+    elif filter_type == 'design':
+        projects = projects.filter(project_type='DESIGN')
+        
     return render(request, 'portfolio/work.html', {'page': 'work', 'projects': projects})
 
 def project_detail(request, pk):
@@ -68,12 +78,10 @@ def services(request):
     return render(request, 'portfolio/services.html', {'page': 'services', 'services': services_list})
 
 def blog(request):
-    # Fetch all blog posts ordered by newest first
     posts = BlogPost.objects.all().order_by('-date_published')
     return render(request, 'portfolio/blog.html', {'page': 'blog', 'posts': posts})
 
 def blog_detail(request, pk):
-    # This is the NEW view for the single Blog Post Page
     post = get_object_or_404(BlogPost, pk=pk)
     return render(request, 'portfolio/blog_detail.html', {'post': post})
 
@@ -116,13 +124,14 @@ def contact(request):
             messages.success(request, 'Message sent successfully! We will contact you shortly.')
 
         except Exception as e:
-            # For development, it's useful to print the error to console
             print(e)
             messages.error(request, 'Error sending message. Please try again.')
 
         return redirect('contact')
 
     return render(request, 'portfolio/contact.html', {'page': 'contact'})
+
+# --- FOOTER / LEGAL PAGES ---
 
 def solutions(request):
     return render(request, 'portfolio/solutions.html')

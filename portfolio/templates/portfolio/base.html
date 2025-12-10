@@ -57,11 +57,39 @@
               class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
               >About</a
             >
-            <a
-              href="{% url 'work' %}"
-              class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
-              >Work</a
-            >
+
+            <div class="relative group">
+              <a
+                href="{% url 'work' %}"
+                class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all flex items-center gap-1 cursor-pointer"
+              >
+                Work
+                <i
+                  data-lucide="chevron-down"
+                  class="w-3 h-3 mt-0.5 opacity-50 group-hover:rotate-180 transition-transform"
+                ></i>
+              </a>
+
+              <div
+                class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 p-2 z-50"
+              >
+                <a
+                  href="{% url 'work' %}?type=web"
+                  class="flex items-center gap-2 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                >
+                  <i data-lucide="globe" class="w-4 h-4 text-cyan-400"></i>
+                  Web Development
+                </a>
+                <a
+                  href="{% url 'work' %}?type=design"
+                  class="flex items-center gap-2 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                >
+                  <i data-lucide="palette" class="w-4 h-4 text-purple-400"></i>
+                  Graphic Design
+                </a>
+              </div>
+            </div>
+
             <a
               href="{% url 'services' %}"
               class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
@@ -103,14 +131,26 @@
             class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg"
             >About</a
           >
+
+          <div
+            class="px-4 py-2 text-slate-500 text-xs font-bold uppercase tracking-wider mt-2"
+          >
+            Portfolio
+          </div>
           <a
-            href="{% url 'work' %}"
-            class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg"
-            >Work</a
+            href="{% url 'work' %}?type=web"
+            class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg pl-8 border-l border-slate-800 ml-4"
+            >Web Development</a
           >
           <a
+            href="{% url 'work' %}?type=design"
+            class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg pl-8 border-l border-slate-800 ml-4"
+            >Graphic Design</a
+          >
+
+          <a
             href="{% url 'services' %}"
-            class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg"
+            class="block px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-lg mt-2"
             >Services</a
           >
           <a
@@ -195,11 +235,11 @@
       >
         <div class="text-slate-300 text-sm">
           <span class="text-white font-bold block mb-1 text-lg"
-            >We value your privacy</span
+            >Cookie Notice</span
           >
           <p class="max-w-2xl">
-            We use cookies to enhance your browsing experience and analyze our
-            traffic. By clicking "Accept", you consent to our use of cookies.
+            By continuing to use this website, you agree to our use of cookies
+            to enhance your browsing experience.
             <a
               href="{% url 'privacy' %}"
               class="text-cyan-400 hover:underline font-semibold ml-1"
@@ -209,16 +249,10 @@
         </div>
         <div class="flex gap-4 shrink-0">
           <button
-            onclick="declineCookies()"
-            class="px-6 py-3 rounded-xl border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all text-sm font-bold"
-          >
-            Decline
-          </button>
-          <button
             onclick="acceptCookies()"
-            class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 transition-all text-sm"
+            class="px-8 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 transition-all text-sm"
           >
-            Accept Cookies
+            Got it
           </button>
         </div>
       </div>
@@ -238,13 +272,12 @@
         }
       });
 
-      // 3. Cookie Consent Logic
+      // 3. Cookie Notice Logic
       document.addEventListener("DOMContentLoaded", () => {
         const banner = document.getElementById("cookie-banner");
 
-        // Check if user has already made a choice
+        // Check if user has already acknowledged
         if (!localStorage.getItem("cookieConsent")) {
-          // Show banner with a slight delay for smooth animation
           banner.classList.remove("hidden");
           setTimeout(() => {
             banner.classList.remove("translate-y-full");
@@ -253,16 +286,9 @@
       });
 
       function acceptCookies() {
+        // Save that the user has seen and accepted the notice
         localStorage.setItem("cookieConsent", "accepted");
-        hideBanner();
-      }
 
-      function declineCookies() {
-        localStorage.setItem("cookieConsent", "declined");
-        hideBanner();
-      }
-
-      function hideBanner() {
         const banner = document.getElementById("cookie-banner");
         banner.classList.add("translate-y-full");
         setTimeout(() => {
